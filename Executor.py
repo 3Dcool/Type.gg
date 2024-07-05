@@ -36,7 +36,7 @@ class MyTextEditor(tk.Tk):
 
         # Create a label for the credits and add it to the credits frame
         self.credits_label = tk.Label(self.credits_frame, text="Credits and Version Information")
-        self.credits_label = tk.Label(self.credits_frame, text="By: Siri#0003. Version 1.0.0")
+        self.credits_label = tk.Label(self.credits_frame, text="By: Siri#0003. Version 1.0.2")
         self.credits_label.pack(pady=10)
         # Create buttons and add them to the editor frame
         execute_button = tk.Button(self.editor_frame, text="Execute", command=self.execute)
@@ -51,7 +51,8 @@ class MyTextEditor(tk.Tk):
         save_button.pack(side=tk.RIGHT)
 
     def execute(self):
-        pass
+        # Get the contents of the text widget
+        contents = self.text.get("1.0", tk.END)
 
     def show_editor(self):
         # Show the main editor frame and hide the credits frame
