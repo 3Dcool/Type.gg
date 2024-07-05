@@ -15,18 +15,22 @@ class MyTextEditor(tk.Tk):
         sidebar.pack(side=tk.LEFT, fill=tk.Y)
 
         # Create the button for the main editor and add it to the side bar
-        editor_button = tk.Button(sidebar, text="Editor", bg="gray", command=self.show_editor)
+        editor_button = tk.Button(sidebar, text="Executor", bg="Green", command=self.show_editor)
         editor_button.pack(side=tk.TOP, pady=10)
 
         # Create the button for the credits and add it to the side bar
-        credits_button = tk.Button(sidebar, text="Credits", bg="gray", command=self.show_credits)
+        credits_button = tk.Button(sidebar, text="Credits", bg="Green", command=self.show_credits)
         credits_button.pack(side=tk.TOP, pady=10)
+
+        # Create the button for the notes and add it to the side bar
+        notes_button = tk.Button(sidebar, text="Notes", bg="Green", command=self.show_notes)
+        notes_button.pack(side=tk.TOP, pady=10)
 
         # Create a frame for the main editor and add it to the window
         self.editor_frame = tk.Frame(self)
         self.editor_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=1)
 
-                # Create a text widget and add it to the editor frame
+        # Create a text widget and add it to the editor frame
         self.text = tk.Text(self.editor_frame)
         self.text.pack(fill=tk.BOTH, expand=1)
 
@@ -35,9 +39,13 @@ class MyTextEditor(tk.Tk):
         self.credits_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=1)
 
         # Create a label for the credits and add it to the credits frame
-        self.credits_label = tk.Label(self.credits_frame, text="Credits and Version Information")
-        self.credits_label = tk.Label(self.credits_frame, text="By: Siri#0003. Version 1.0.2")
+        self.credits_label = tk.Label(self.credits_frame, text="Credits and Version Information. By: Siri#0003. Version 1.0.3.")
         self.credits_label.pack(pady=10)
+        
+        # Creates a label for the credits below the first line
+        self.credits_label = tk.Label(self.credits_frame, text="Your notes will be saved, by pressing the save button.")
+        self.credits_label.pack(pady=12)
+
         # Create buttons and add them to the editor frame
         execute_button = tk.Button(self.editor_frame, text="Execute", command=self.execute)
         execute_button.pack(side=tk.LEFT)
@@ -64,14 +72,14 @@ class MyTextEditor(tk.Tk):
         self.credits_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=1)
         self.editor_frame.pack_forget()
 
+        def show_notes(self): 
+            # Show the notes frame and hide the main editor frame
+            self.notes_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=1)
+            self.editor_frame.pack_forget()
+
     def open_file(self):
-        # Open a file dialog to select a file to open
-        filepath = tk.filedialog.askopenfilename()
-        if filepath:
-            # Open the selected file and insert its contents into the text widget
-            with open(filepath, "r") as f:
-                contents = f.read()
-                self.text.insert("end", contents)
+        # Open a file dialog to select a file
+        file_path = tk.filedialog.askopenfilename()
 
     def clear(self):
     # Display a confirmation dialog
@@ -92,6 +100,11 @@ class MyTextEditor(tk.Tk):
         # Open a file for writing and write the contents to it
         with open("saved_text.txt", "w") as f:
             f.write(contents)
+
+    def show_notes(self): 
+        # Show the notes frame and hide the main editor frame
+        self.notes_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=1)
+        self.editor_frame.pack_forget()
 
 editor = MyTextEditor()
 editor.mainloop()
