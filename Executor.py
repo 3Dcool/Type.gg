@@ -23,6 +23,10 @@ class MyTextEditor(tk.Tk):
         credits_button = tk.Button(sidebar, text="Credits", bg="gray", command=self.show_credits)
         credits_button.pack(side=tk.TOP, pady=10)
 
+        # Create the button for the notes and add it to the side bar
+        notes_button = tk.Button(sidebar, text="Notes", bg="gray", command=self.show_notes)
+        notes_button.pack(side=tk.TOP, pady=10)
+
         # Create a frame for the main editor and add it to the window
         self.editor_frame = tk.Frame(self)
         self.editor_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=1)
